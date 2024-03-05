@@ -29,6 +29,17 @@ export const fetchTokenData = async () => {
     });
   };
 
+  const calculateAverage = (data: TTokenData[]) => {
+    if (data.length === 0) {
+      return "0";
+    }
+
+    const sum = data.reduce((acc, entry) => acc + entry.value, 0);
+    const average = sum / data.length;
+
+    return average.toFixed(2);
+  };
+
   const atom: TTokenData[] =
     data.result.data.json[
       "ibc/C4CFF46FD6DE35CA4CF4CE031E643C8FDC9BA4B99AE598E9B0ED98FE3A2319F9"
@@ -38,10 +49,12 @@ export const fetchTokenData = async () => {
 
   const atomMax = Math.max(...atom.map((item) => item.value));
   const atomMin = Math.min(...atom.map((item) => item.value));
+  const atomAvg = calculateAverage(atom);
   const ntrnMax = Math.max(...ntrn.map((item) => item.value));
   const ntrnMin = Math.min(...ntrn.map((item) => item.value));
+  const ntrnAvg = calculateAverage(ntrn);
 
   const chartData = formatChartData(atom, ntrn);
 
-  return { chartData, atomMax, atomMin, ntrnMax, ntrnMin };
+  return { chartData, atomMax, atomMin, ntrnMax, ntrnMin, atomAvg, ntrnAvg };
 };
