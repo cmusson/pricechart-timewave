@@ -15,7 +15,7 @@ const MinMax = ({ token, max, min, avg, src }: IMinMax) => {
       <Image width={50} height={50} src={src} alt={`${token} image`} />
       <div>{`$${token} Max: $${max}`}</div>
       <div>{`$${token} Min: $${min}`}</div>
-      <div>{`$${token} Average: ${avg}`}</div>
+      <div>{`$${token} Average: $${avg}`}</div>
     </div>
   );
 };
